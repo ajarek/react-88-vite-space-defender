@@ -13,8 +13,8 @@ const Gun = () => {
           : setPosition((prevPosition) => prevPosition - 10)
       } else if (event.key === 'ArrowRight') {
         // Sterowanie w prawo
-        divRef.current.offsetLeft === 540
-          ? setPosition((prevPosition) => (prevPosition = 540))
+        divRef.current.offsetLeft === 560
+          ? setPosition((prevPosition) => (prevPosition = 560))
           : setPosition((prevPosition) => prevPosition + 10)
       }
     }

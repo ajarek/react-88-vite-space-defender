@@ -1,7 +1,7 @@
 .board{
   width: 600px;
   height: 400px;
-  background-color: var(--white);
-  border: 2px solid var(--blue);
+  background-color: var(--blue);
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
   position: relative;
 }
