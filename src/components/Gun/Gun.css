@@ -4,6 +4,15 @@
   background-image:url('/Coilgun.png');
   background-repeat: no-repeat;
   background-size: cover;
+ 
   
-  
+}
+.bullets{
+  /* width: 10px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: red; */
+  transform: rotate(45deg);
+  transform: translateX(-50%);
+
 }
