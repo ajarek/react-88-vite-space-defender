@@ -2,12 +2,10 @@ import React, { useRef, useEffect, useState } from 'react'
 import './Gun.css'
 const Gun = () => {
   const divRef = useRef(null)
-  const bulletsRef = useRef(null)
-  const [position, setPosition] = useState(270)
-  const [range, setRange] = useState(-10)
-  const [showDiv, setShowDiv] = useState(false)
-  const [array, setArray] = useState([1,1,1,1,1])
 
+  const [position, setPosition] = useState(270)
+
+  const [bullets, setBullets] = useState([])
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -20,56 +18,66 @@ const Gun = () => {
         // Sterowanie w prawo
         divRef.current.offsetLeft === 560
           ? setPosition((prevPosition) => (prevPosition = 560))
-          : setPosition((prevPosition) => prevPosition + 10) 
+          : setPosition((prevPosition) => prevPosition + 10)
       } else if (event.key === ' ') {
-        
-        const intervalId = setInterval(() => {
-          
-         
-            setRange((prevPosition) => prevPosition - 10)
-        }, 200)
-
-        setShowDiv(true)
-        return () => {
-          clearInterval(intervalId)
-        }
+        fire() 
       }
     }
-
     window.addEventListener('keydown', handleKeyDown)
-   
     return () => {
       window.removeEventListener('keydown', handleKeyDown)
     }
   }, [])
-  range === -320
-  ? setRange((prevPosition) => (prevPosition = -10)):null
+
+  const fire = () => {
+    console.log(position)
+    const newBullet = {
+      id: Date.now(),
+      bottom: 80,
+      left: divRef.current.offsetLeft,
+    }
+    setBullets((prevBullets) => [...prevBullets, newBullet])
+  }
+
+  useEffect(() => {
+    const bulletIntervalId = setInterval(() => {
+      setBullets((prevBullets) =>
+        prevBullets.map((bullet) => ({
+          ...bullet,
+          bottom: bullet.bottom + 10,
+        }))
+      )
+    }, 50)
+    return () => {
+      clearInterval(bulletIntervalId)
+    }
+  }, [bullets])
+
   return (
-    <div
-      className='gun'
-      ref={divRef}
-      style={{
-        position: 'absolute',
-        left: `${position}px`,
-        bottom: '0px',
-      }}
-    >
-      {showDiv && (
-        array.map((item,index) =>
+    <>
+      {bullets.map((bullet) => (
         <div
-          key={index}
-          className='bullets'
-          ref={bulletsRef}
-          style={{
-            position: 'absolute',
-            top: `${range*index}px`,
-            left: '50%',
-          }}
+          key={bullet.id}
+          className='bullet'
+          style={{ bottom: bullet.bottom, left: bullet.left }}
         >
-         <img src="/rocket.png" alt="" />
-        </div>)
-      )}
-    </div>
+          {' '}
+          <img
+            src='/rocket.png'
+            alt=''
+          />
+        </div>
+      ))}
+      <div
+        className='gun'
+        ref={divRef}
+        style={{
+          position: 'absolute',
+          left: `${position}px`,
+          bottom: '0px',
+        }}
+      />
+    </>
   )
 }
 

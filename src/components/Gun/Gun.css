@@ -7,12 +7,7 @@
  
   
 }
-.bullets{
-  /* width: 10px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: red; */
-  transform: rotate(45deg);
-  transform: translateX(-50%);
-
-}
+.bullet{
+ 
+    position: absolute;    
+  }
