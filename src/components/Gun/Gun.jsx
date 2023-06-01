@@ -30,21 +30,20 @@ const Gun = () => {
   }, [])
 
   const fire = () => {
-    console.log(position)
     const newBullet = {
       id: Date.now(),
       bottom: 80,
       left: divRef.current.offsetLeft,
     }
     setBullets((prevBullets) => [...prevBullets, newBullet])
-  }
+  } 
 
   useEffect(() => {
     const bulletIntervalId = setInterval(() => {
       setBullets((prevBullets) =>
-        prevBullets.map((bullet) => ({
+        prevBullets.map((bullet,index,arr) => ({
           ...bullet,
-          bottom: bullet.bottom + 10,
+          bottom:bullet.bottom>350?arr.splice(index,1): bullet.bottom + 10,
         }))
       )
     }, 50)
