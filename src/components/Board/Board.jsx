@@ -8,7 +8,8 @@ const Board = () => {
   return (
     
     <div className='board'>
-      <button onClick={()=>setStart(!start)}>Start/Pause</button>
+      <button onClick={()=>setStart(true)}>Start</button>
+      <button onClick={()=>setStart(false)}>Pause</button>
        {start?<Divs/>:null}
       <Gun/>
       

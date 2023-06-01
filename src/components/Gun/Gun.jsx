@@ -1,6 +1,8 @@
-import React, { useRef, useEffect, useState } from 'react'
+import { React, useState, useContext, useEffect, useRef } from 'react'
+import { AppContext } from '../../App'
 import './Gun.css'
 const Gun = () => {
+  const { divs, setDivs } = useContext(AppContext)
   const divRef = useRef(null)
 
   const [position, setPosition] = useState(270)
@@ -20,7 +22,7 @@ const Gun = () => {
           ? setPosition((prevPosition) => (prevPosition = 560))
           : setPosition((prevPosition) => prevPosition + 10)
       } else if (event.key === ' ') {
-        fire() 
+        fire()
       }
     }
     window.addEventListener('keydown', handleKeyDown)
@@ -36,21 +38,31 @@ const Gun = () => {
       left: divRef.current.offsetLeft,
     }
     setBullets((prevBullets) => [...prevBullets, newBullet])
-  } 
+  }
+
+  bullets.filter((bullet) => {
+    divs.find((div, index, arr) => {
+     
+        console.log(bullet.left,div.left);
+      
+    })
+  })
 
   useEffect(() => {
     const bulletIntervalId = setInterval(() => {
       setBullets((prevBullets) =>
-        prevBullets.map((bullet,index,arr) => ({
+        prevBullets.map((bullet, index, arr) => ({
           ...bullet,
-          bottom:bullet.bottom>350?arr.splice(index,1): bullet.bottom + 10,
+          bottom:
+            bullet.bottom > 350 ? arr.splice(index, 1) : bullet.bottom + 10,
         }))
       )
     }, 50)
+
     return () => {
       clearInterval(bulletIntervalId)
     }
-  }, [bullets])
+  }, [bullets, divs])
 
   return (
     <>

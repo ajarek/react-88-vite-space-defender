@@ -1,13 +1,5 @@
 .falling-div {
   position: absolute;
   pointer-events: none; /* Wyłącza reakcję na zdarzenia kliknięcia */
-  animation: fall 3s linear infinite; /* Animacja opadania */
-}
-@keyframes fall {
-  0% {
-    top: -50px; /* Początkowa pozycja nad obszarem gry */
-  }
-  100% {
-    top: 450px; /* Końcowa pozycja pod obszarem gry */
-  }
+  
 }

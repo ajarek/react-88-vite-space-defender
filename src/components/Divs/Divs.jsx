@@ -1,7 +1,9 @@
-import React, {useState, useEffect} from 'react'
+import { React, useState, useContext, useEffect } from 'react'
+import { AppContext } from '../../App'
 import './Divs.css'
 const Divs = () => {
-  const [divs, setDivs] = useState([]);
+  
+  const { divs, setDivs } = useContext(AppContext)
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -18,6 +20,19 @@ const Divs = () => {
       clearInterval(intervalId);
     };
   }, []);
+  useEffect(() => {
+  const divIntervalId = setInterval(() => {
+    setDivs(prevDivs =>
+      prevDivs.map(div => ({
+        ...div,
+        top: div.top + 10,
+      }))
+    );
+  }, 100);
+  return () => {
+    clearInterval(divIntervalId);
+  };
+}, []);
   return (
     <>
       {divs.map(div => (
