@@ -27,3 +27,6 @@ body {
   align-items: center;
   justify-content: center;
 }
+#root h2{
+  color: var(--red);
+}

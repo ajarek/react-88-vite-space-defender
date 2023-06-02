@@ -2,48 +2,53 @@ import { React, useState, useContext, useEffect } from 'react'
 import { AppContext } from '../../App'
 import './Divs.css'
 const Divs = () => {
-  
-  const { divs, setDivs } = useContext(AppContext)
+  const {divs, setDivs, start, setStart } = useContext(AppContext)
 
   useEffect(() => {
     const intervalId = setInterval(() => {
       const newDiv = {
         id: Date.now(),
-        top: 0,
+        bottom: 400,
         left: Math.floor(Math.random() * 400),
-      };
+      }
 
-      setDivs(prevDivs => [...prevDivs, newDiv]);
-    }, 1000);
+      setDivs((prevDivs) => [...prevDivs, newDiv])
+    }, 5000)
 
     return () => {
-      clearInterval(intervalId);
-    };
-  }, []);
+      clearInterval(intervalId)
+    }
+  }, [])
   useEffect(() => {
-  const divIntervalId = setInterval(() => {
-    setDivs(prevDivs =>
-      prevDivs.map(div => ({
-        ...div,
-        top: div.top + 10,
-      }))
-    );
-  }, 100);
-  return () => {
-    clearInterval(divIntervalId);
-  };
-}, []);
+    setDivs([])
+    const divIntervalId = setInterval(() => {
+      setDivs((prevDivs) =>
+        prevDivs.map((div, index, arr) => ({
+          ...div,
+          bottom: div.bottom - 10,
+        }))
+      )
+    }, 100)
+    return () => {
+      clearInterval(divIntervalId)
+    }
+  }, [])
+
+  
   return (
     <>
-      {divs.map(div => (
-          <div
-            key={div.id}
-            className="falling-div"
-            style={{ top: div.top, left: div.left }}
-          >
-            <img src="/ufo.png" alt="" />
-          </div>
-        ))}
+      {divs.map((div) => (
+        <div
+          key={div.id}
+          className='falling-div'
+          style={{ bottom: div.bottom, left: div.left }}
+        >
+          <img
+            src='/ufo.png'
+            alt='ufo'
+          />
+        </div>
+      ))}
     </>
   )
 }
