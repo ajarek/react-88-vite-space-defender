@@ -17,3 +17,12 @@
 .board button:hover{
   background-color: var(--green);
 }
+.wrapper-board{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 16px;
+}
+.board .score{
+  color: var(--white);
+}

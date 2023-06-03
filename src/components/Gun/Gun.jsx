@@ -2,7 +2,7 @@ import { React, useState, useContext, useEffect, useRef } from 'react'
 import { AppContext } from '../../App'
 import './Gun.css'
 const Gun = () => {
-  const { divs, setDivs, start, setStart,setEnd } = useContext(AppContext)
+  const { divs, setDivs, start, setStart,setEnd, score, setScore } = useContext(AppContext)
   const divRef = useRef(null)
 
   const [position, setPosition] = useState(270)
@@ -49,6 +49,7 @@ const Gun = () => {
               bullet.left <= div.left + 60
           ){
           arr.splice(index, 1)
+          setScore(prevScore => prevScore + 1);
         }
        
 

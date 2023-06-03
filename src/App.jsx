@@ -5,9 +5,10 @@ function App() {
   const [divs, setDivs] = useState([]);
   const [start, setStart]=useState(false)
   const [end, setEnd]=useState(false)
+  const [score, setScore] = useState(0);
   return (
     <div>
-      <AppContext.Provider value={{divs, setDivs, start, setStart, end, setEnd}}>
+      <AppContext.Provider value={{divs, setDivs, start, setStart, end, setEnd, score, setScore}}>
        {end?<h2>Game is over</h2>:null}
       <Board />
       </AppContext.Provider>
