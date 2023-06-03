@@ -1,13 +1,10 @@
-.gun{
+.gun {
   width: 40px;
   height: 80px;
-  background-image:url('/Coilgun.png');
+  background-image: url('/Coilgun.png');
   background-repeat: no-repeat;
   background-size: cover;
- 
-  
 }
-.bullet{
- 
-    position: absolute;    
-  }
+.bullet {
+  position: absolute;
+}

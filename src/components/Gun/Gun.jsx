@@ -2,7 +2,8 @@ import { React, useState, useContext, useEffect, useRef } from 'react'
 import { AppContext } from '../../App'
 import './Gun.css'
 const Gun = () => {
-  const { divs, setDivs, start, setStart,setEnd, score, setScore } = useContext(AppContext)
+  const { divs, setDivs, start, setStart, setEnd, setScore } =
+    useContext(AppContext)
   const divRef = useRef(null)
 
   const [position, setPosition] = useState(270)
@@ -42,29 +43,25 @@ const Gun = () => {
 
   bullets.filter((bullet) => {
     divs.find((div, index, arr) => {
-                 
-        if(
-          div.bottom===bullet.bottom  &&
-              bullet.left >= div.left &&
-              bullet.left <= div.left + 60
-          ){
-          arr.splice(index, 1)
-          setScore(prevScore => prevScore + 1);
-        }
-       
-
+      if (
+        div.bottom === bullet.bottom &&
+        bullet.left >= div.left &&
+        bullet.left <= div.left + 60
+      ) {
+        arr.splice(index, 1)
+        setScore((prevScore) => prevScore + 1)
+      }
     })
   })
-  useEffect(() =>{
-  divs.forEach((div, index, arr) => {
-     if (div.bottom <= 0) {
-      setDivs([])
-      setStart(false)
-      setEnd(true)
-       
-     }
+  useEffect(() => {
+    divs.forEach((div) => {
+      if (div.bottom <= 0) {
+        setDivs([])
+        setStart(false)
+        setEnd(true)
+      }
+    })
   })
-})
 
   useEffect(() => {
     const bulletIntervalId = setInterval(() => {

@@ -1,5 +1,4 @@
 .falling-div {
   position: absolute;
   pointer-events: none; /* Wyłącza reakcję na zdarzenia kliknięcia */
-  
 }
